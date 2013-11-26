@@ -8,10 +8,10 @@
 #
 
 #htmlディレクトリ削除
-#directory "/var/www/html" do
-#  action :delete
-#  only_if { File.exists?("/var/www/html") }
-#end
+directory "/var/www/html" do
+  action :delete
+  only_if { File.exists?("/var/www/html") }
+end
 
 #シンボリックリンク作成
 link "/var/www/html" do
