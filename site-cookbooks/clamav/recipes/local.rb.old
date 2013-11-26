@@ -35,19 +35,32 @@ end
 
 #定期スキャン用スクリプト配置
 template "clamscan_script" do
-  path "#{node['clamav']['script_path']}clam-full.sh"
-  source "clam-full.erb"
+  path "#{node['clamav']['script_path']}clam-full-local.sh"
+  source "clam-full-local.erb"
   mode 0755
+end
+execute "Remove old update&scan script" do
+  user 'root'
+  command "rm #{node['clamav']['script_path']}clam-full.sh"
+  only_if { File.exists?("#{node['clamav']['script_path']}clam-full.sh") }
 end
 
 #定期スキャン用cron設定
-cron "cron_clamscan" do
+cron "add_cron_clamscan" do
+  user "root"
+  minute "00"
+  hour "3"
+  weekday "2"
+  command %Q!#{node['clamav']['script_path']}clam-full-local.sh!
+  action :create
+end
+cron "delete_cron_clamscan" do
   user "root"
   minute "00"
   hour "3"
   weekday "2"
   command %Q!#{node['clamav']['script_path']}clam-full.sh!
-  action :create
+  action :delete
 end
 execute "Remove update pattern daily jobs." do
   user 'root'

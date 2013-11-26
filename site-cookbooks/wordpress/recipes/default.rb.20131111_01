@@ -1,0 +1,43 @@
+#
+# Cookbook Name:: wordpress
+# Recipe:: default
+#
+# Copyright 2013, YOUR_COMPANY_NAME
+#
+# All rights reserved - Do Not Redistribute
+#
+filename = "#{node['wordpress']['wp_tar_name']}"
+install_dir = "#{node['wordpress']['wp_dir']}"
+remote_uri = "#{node['wordpress']['wp_tar_uri']}"
+file_checksum = "#{node['wordpress']['wp_tar_sum']}"
+
+
+#パッケージインストール
+%w{httpd php php-mysql php-mbstring}.each do |package_name|
+  package package_name do
+    action :install
+  end
+end
+
+#インストールディレクトリ作成
+directory "#{install_dir}" do
+  recursive true
+  mode 0755
+  action :create
+end
+
+#WordPressダウンロード
+remote_file "/tmp/#{filename}" do
+  source "#{remote_uri}"
+  checksum "#{file_checksum}"
+end
+
+#WordPress配置
+script "install_wordpress" do
+  interpreter "bash"
+  user        "root"
+  code <<-EOL
+    install -d #{install_dir}
+    tar zxvf /tmp/#{filename} -C #{install_dir}
+  EOL
+end

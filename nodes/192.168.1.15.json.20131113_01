@@ -1,0 +1,10 @@
+{
+  "mysql": {
+    "server_root_password": "erde8823",
+    "server_repl_password": "erde8823",
+    "server_debian_password": "erde8823"
+  },
+"run_list" : [
+       "mysql::server","rfa-mysql"
+]
+}

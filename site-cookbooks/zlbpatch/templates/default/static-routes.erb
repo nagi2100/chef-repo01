@@ -1,0 +1,2 @@
+#!/bin/sh
+route add -net <%= node['zlbpatch']['nwaddr'] %> netmask <%= node['zlbpatch']['netmask'] %> gateway <%= node['zlbpatch']['gwaddr'] %>

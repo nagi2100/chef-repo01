@@ -7,7 +7,22 @@
 # All rights reserved - Do Not Redistribute
 #
 
-include_recipe "yum::epel"
+#EPEL追加
+filename = "epel-release-6-8.noarch.rpm"
+file_checksum = "e5ed9ecf22d0c4279e92075a64c757ad2b38049bcf5c16c4f2b75d5f6860dc0d"
+
+cookbook_file "/tmp/#{filename}" do
+  source "#{filename}"
+  checksum "#{file_checksum}"
+end
+
+package "epel" do
+  action :install
+  provider Chef::Provider::Package::Rpm
+  source "/tmp/#{filename}"
+end
+
+#include_recipe 'yum::epel'
 
 #clamdインストール
 %w{clamd}.each do |package_name|
@@ -17,20 +32,13 @@ include_recipe "yum::epel"
 end
 
 #定義ファイル更新cron設定
-#cron "cron_freshclam" do
-#  user "root"
-#  minute "00"
-#  hour "3"
-#  weekday "2"
-#  command %Q!/usr/bin/freshclam --quiet -l #{node['clamav']['log_path']}#{node['clamav']['freshclam_log_filename']}!
-#  action :create
-#end
-
-# 設定ファイルの変更
-execute "Modify clamd.conf" do
-  user    'root'
-  command "sed -i 's/^User clam/User root/g' /etc/clamd.conf"
-  only_if { File.exists?("/etc/clamd.conf") }
+cron "cron_freshclam" do
+  user "root"
+  minute "00"
+  hour "3"
+  weekday "2"
+  command %Q!/usr/bin/freshclam --quiet -l #{node['clamav']['log_path']}#{node['clamav']['freshclam_log_filename']}!
+  action :create
 end
 
 #定期スキャン用スクリプト配置
@@ -46,15 +54,9 @@ cron "cron_clamscan" do
   minute "00"
   hour "3"
   weekday "2"
-  command %Q!#{node['clamav']['script_path']}clam-full.sh!
+  command %Q!#{node['clamav']['log_path']}clam-full.sh!
   action :create
 end
-execute "Remove update pattern daily jobs." do
-  user 'root'
-  command "rm /etc/cron.daily/freshclam"
-  only_if { File.exists?("/etc/cron.daily/freshclam") } 
-end
-
 
 #隔離ディレクトリ作成
 directory "#{node['clamav']['move_path']}" do

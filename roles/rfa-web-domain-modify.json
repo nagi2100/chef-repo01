@@ -1,0 +1,11 @@
+{
+  "name":"rfa-web-domain-modify",
+  "chef_type": "role",
+  "json_class":"Chef::Role",
+  "description":"rfa webserver&smtpserver setting(after domain fix)",
+  "run_list": [
+        "recipe[wordpress]",
+        "recipe[ssl]",
+        "recipe[rfa-postfix]"
+        ]
+}

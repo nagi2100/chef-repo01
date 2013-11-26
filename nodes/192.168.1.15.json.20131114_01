@@ -1,0 +1,12 @@
+{
+"run_list" : [
+       "yum::epel","yum::remi","mysql::server"
+],
+
+    "mysql": {
+        "pid_file" : "/data/mysql/mysql.pid",
+        "server_root_password": "erde8823",
+        "server_repl_password": "erde8823",
+        "server_debian_password": "erde8823"
+          }
+}

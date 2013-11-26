@@ -1,0 +1,30 @@
+{
+  "mysql": {
+    "pid_file" : "/data/mysql/mysql.pid"
+          },
+  "mysql": {
+      "server": {
+        "socket" : "/data/mysql/mysql.sock",
+        "pid_file" : "/data/mysql/mysql.pid",
+        "data_dir" : "/data/mysql/",
+        "slow_query_log_file" : "/data/mysql/mysql-slow.log"
+         } },
+  "mysql": {
+      "server": {
+        "directories": {
+          "log_dir" : "/data/mysql/" } } },
+  "mysql": {
+      "tunable": {
+         "log_bin" : "/data/mysql/mysql-bin",
+         "log_error" : "/data/mysql/mysql-error.log"
+          }
+        },
+  "mysql": {
+    "server_root_password": "",
+    "server_repl_password": "",
+    "server_debian_password": ""
+          },
+"run_list" : [
+       "yum::epel","yum::remi","mysql::server","sql-wp"
+]
+}

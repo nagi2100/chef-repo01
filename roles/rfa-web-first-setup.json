@@ -1,0 +1,13 @@
+{
+  "name":"rfa-web-first-setup",
+  "chef_type": "role",
+  "json_class":"Chef::Role",
+  "description":"rfa webserver first setup(before domain fix)",
+  "run_list": [
+        "recipe[yum::epel]",
+        "recipe[apache2]",
+        "recipe[php]",
+        "recipe[php::module_mysql]",
+        "recipe[wordpress]"
+        ]
+}
