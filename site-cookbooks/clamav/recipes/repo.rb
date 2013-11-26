@@ -10,7 +10,7 @@
 #htmlディレクトリ削除
 directory "/var/www/html" do
   action :delete
-  only_if { File.exists?("/var/www/html") }
+  not_if { File.exists?("/var/www/html") }
 end
 
 #シンボリックリンク作成
@@ -18,6 +18,8 @@ link "/var/www/html" do
   to "/var/lib/clamav"
   link_type :symbolic
   action :create
+#  not_if { File.link?("/var/www/html") }
+  not_if { File.exists?("/var/www/html") }
 end
 
 #httpd.conf配置
