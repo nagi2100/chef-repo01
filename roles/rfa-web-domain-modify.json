@@ -5,7 +5,6 @@
   "description":"rfa webserver&smtpserver setting(after domain fix)",
   "run_list": [
         "recipe[wordpress]",
-        "recipe[ssl]",
         "recipe[rfa-postfix]"
         ]
 }

@@ -1,5 +1,5 @@
 {
 "run_list" : [
-       "role[rfa-web-first-setup]"
+       "role[rfa-web-domain-modify]"
 ]
 }
