@@ -1,5 +1,30 @@
 {
+  "mysql": {
+    "pid_file" : "/data/mysql/mysql.pid"
+          },
+  "mysql": {
+      "server": {
+        "socket" : "/data/mysql/mysql.sock",
+        "pid_file" : "/data/mysql/mysql.pid",
+        "data_dir" : "/data/mysql/",
+        "slow_query_log_file" : "/data/mysql/mysql-slow.log"
+         } },
+  "mysql": {
+      "server": {
+        "directories": {
+          "log_dir" : "/data/mysql/" } } },
+  "mysql": {
+      "tunable": {
+         "log_bin" : "/data/mysql/mysql-bin",
+         "log_error" : "/data/mysql/mysql-error.log"
+          }
+        },
+  "mysql": {
+    "server_root_password": "zaq12wsx",
+    "server_repl_password": "zaq12wsx",
+    "server_debian_password": "zaq12wsx"
+          },
 "run_list" : [
-       "role[clamav-repo]"
+       "yum::epel","yum::remi","mysql::server","sql-wp"
 ]
 }

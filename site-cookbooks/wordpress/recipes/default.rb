@@ -8,6 +8,7 @@
 #
 filename = "#{node['wordpress']['wp_tar_name']}"
 install_dir = "#{node['wordpress']['wp_dir']}"
+document_root = "/var/www/rfa/"
 remote_uri = "#{node['wordpress']['wp_tar_uri']}"
 file_checksum = "#{node['wordpress']['wp_tar_sum']}"
 httpd_conf_dir = "#{node['wordpress']['httpd_conf_dir']}"
@@ -43,9 +44,10 @@ script "install_wordpress" do
   user        "root"
   code <<-EOL
     install -d #{install_dir}
-    tar zxvf /tmp/#{filename} -C #{install_dir}
+    tar zxvf /tmp/#{filename} -C #{document_root}
   EOL
 #  not_if { File.exists?("") }
+#    tar zxvf /tmp/#{filename} -C #{install_dir}
 end
 
 #httpd.conf配置
@@ -53,8 +55,10 @@ template "httpdconf" do
   path "#{httpd_conf_dir}httpd.conf"
   source "httpdconf.erb"
   mode 0644
-  notifies :restart, "service[httpd]", :immediately
+  notifies :restart, "service[httpd]"
 end
+
+service "httpd"
 
 #wordpressディレクトリpermission変更
 directory "#{install_dir}/wordpress" do

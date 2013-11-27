@@ -1,5 +1,5 @@
 {
 "run_list" : [
-       "role[clamav-local]"
+       "role[rfa-web-first-setup]"
 ]
 }
