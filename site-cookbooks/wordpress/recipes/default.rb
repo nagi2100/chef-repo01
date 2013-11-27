@@ -45,6 +45,7 @@ script "install_wordpress" do
     install -d #{install_dir}
     tar zxvf /tmp/#{filename} -C #{install_dir}
   EOL
+#  not_if { File.exists?("") }
 end
 
 #httpd.conf配置
@@ -52,6 +53,7 @@ template "httpdconf" do
   path "#{httpd_conf_dir}httpd.conf"
   source "httpdconf.erb"
   mode 0644
+  notifies :restart, "service[httpd]", :immediately
 end
 
 #wordpressディレクトリpermission変更
@@ -68,8 +70,3 @@ htpasswd "#{htpasswd_file}" do
   user "#{htpasswd_id}"
   password "#{htpasswd_pw}"
 end
-
-service "httpd" do
-  action :start
-end
-

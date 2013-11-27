@@ -12,7 +12,7 @@ userid02 = "#{node['rfa-postfix']['account']['userid02']}"
 userpw01 = "#{node['rfa-postfix']['account']['userpw01']}"
 domain = "#{node['rfa-postfix']['main']['mydomain']}"
 
-%w{postfix}.each do |package_name|
+%w{postfix mailx cyrus-sasl-md5}.each do |package_name|
   package package_name do
     action :install
   end
