@@ -1010,13 +1010,13 @@ NameVirtualHost *:80
 
 <VirtualHost *:80>
     ServerAdmin enginnering@steady-inc.net
-    DocumentRoot <%= node['wordpress']['wp_dir'] %>
+    DocumentRoot <%= node['wordpress']['document_root'] %>
     ServerName <%= node['wordpress']['vhost_domain'] %> 
     ErrorLog logs/<%= node['wordpress']['vhost_log'] %>-error_log
     CustomLog logs/<%= node['wordpress']['vhost_log'] %>-access_log common
 </VirtualHost>
 
-<Directory <%= node['wordpress']['wp_dir'] %>>
+<Directory <%= node['wordpress']['document_root'] %>>
    AllowOverride All
    AuthUserFile /var/www/.htpasswd     
    AuthName "Basic Auth"
