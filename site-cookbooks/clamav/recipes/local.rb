@@ -7,6 +7,12 @@
 # All rights reserved - Do Not Redistribute
 #
 
+#freshclam初回実行
+execute "freshclam_first_execute" do
+    command "freshclam"
+    action :run
+end
+
 # 設定ファイルの変更
 template "modify freshclam.conf" do
   path "/etc/freshclam.conf"

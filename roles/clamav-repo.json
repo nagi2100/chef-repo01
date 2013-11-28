@@ -7,6 +7,7 @@
         "recipe[yum::epel]",
         "recipe[clamav]",
         "recipe[apache2]",
-        "recipe[clamav::repo]"
+        "recipe[clamav::repo]",
+        "recipe[iptables::add_line]"
         ]
 }

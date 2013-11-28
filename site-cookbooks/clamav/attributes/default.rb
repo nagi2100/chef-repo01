@@ -6,5 +6,5 @@ default['clamav']['scan_exclude_config_path'] = '/etc/clamscan_exclude.conf'
 default['clamav']['exclude_list'] = ['/sys','/proc','/dev','/var/log/clamav/virus'] 
 default['clamav']['script_path'] = '/usr/local/bin/'
 default['clamav']['httpd_conf_dir'] = '/etc/httpd/conf/'
-default['clamav']['httpd_allow_ip'] = '192.168.1.0/24'
-default['clamav']['private_mirror_ip'] = '192.168.1.225'
+default['clamav']['httpd_allow_ip'] = '10.31.11.0/24'
+default['clamav']['private_mirror_ip'] = '10.31.11.73'

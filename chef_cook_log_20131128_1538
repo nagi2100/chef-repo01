@@ -1,0 +1,66 @@
+Running Chef on 10.31.11.57...
+Checking Chef version...
+Enter the password for john@10.31.11.57: 
+Uploading the kitchen...
+Generating solo config...
+Running Chef...
+
+Starting Chef Client, version 11.6.2[0m
+[2013-11-28T15:44:04+09:00] WARN: unable to detect ip6address
+Compiling Cookbooks...[0m
+Converging 10 resources[0m
+Recipe: yum::epel[0m
+  * yum_key[RPM-GPG-KEY-EPEL-6] action add[0m (up to date)[0m
+  * yum_repository[epel] action add[0m (up to date)[0m
+Recipe: clamav::default[0m
+  * package[clamd] action install[0m (up to date)[0m
+  * execute[Modify clamd.conf] action run[0m[32m
+    - execute sed -i 's/^User clam/User root/g' /etc/clamd.conf[0m
+[0m
+  * template[clamscan_script] action create[0m (up to date)[0m
+  * cron[cron_clamscan] action create[0m (up to date)[0m
+  * execute[Remove update pattern daily jobs.] action run[0m (skipped due to only_if)[0m
+  * directory[/var/log/clamav/virus] action create[0m (up to date)[0m
+  * template[/etc/clamscan_exclude.conf] action create[0m (up to date)[0m
+Recipe: clamav::local[0m
+  * template[modify freshclam.conf] action create[0m[32m
+    - update content in file /etc/freshclam.conf from 81f27e to d5490a[0m[37m
+        --- /etc/freshclam.conf	2013-11-10 03:36:01.905817454 +0900[0m[37m
+        +++ /tmp/chef-rendered-template20131128-10494-1llgqmk	2013-11-28 15:44:47.050219324 +0900[0m[37m
+        @@ -72,12 +72,12 @@[0m[37m
+         # You can use db.XY.ipv6.clamav.net for IPv6 connections.[0m[37m
+         #DatabaseMirror db.XY.clamav.net[0m[37m
+         [0m[37m
+        -# database.clamav.net is a round-robin record which points to our most [0m[37m
+        -# reliable mirrors. It's used as a fall back in case db.XY.clamav.net is [0m[37m
+        +# database.clamav.net is a round-robin record which points to our most[0m[37m
+        +# reliable mirrors. It's used as a fall back in case db.XY.clamav.net is[0m[37m
+         # not working. DO NOT TOUCH the following line unless you know what you[0m[37m
+         # are doing.[0m[37m
+        -DatabaseMirror db.jp.clamav.net[0m[37m
+        -DatabaseMirror db.local.clamav.net[0m[37m
+        +#DatabaseMirror db.jp.clamav.net[0m[37m
+        +#DatabaseMirror db.local.clamav.net[0m[37m
+         [0m[37m
+         # How many attempts to make before giving up.[0m[37m
+         # Default: 3 (per mirror)[0m[37m
+        @@ -112,6 +112,7 @@[0m[37m
+         # Default: disabled[0m[37m
+         #PrivateMirror mirror1.mynetwork.com[0m[37m
+         #PrivateMirror mirror2.mynetwork.com[0m[37m
+        +PrivateMirror 10.31.11.73[0m[37m
+         [0m[37m
+         # Number of database checks per day.[0m[37m
+         # Default: 12 (every two hours)[0m[37m
+        @@ -192,7 +193,7 @@[0m[37m
+         # Default: disabled[0m[37m
+         #DetectionStatsCountry country-code[0m[37m
+         [0m[37m
+        -# This option enables support for our "Personal Statistics" service. [0m[37m
+        +# This option enables support for our "Personal Statistics" service.[0m[37m
+         # When this option is enabled, the information on malware detected by[0m[37m
+         # your clamd installation is made available to you through our website.[0m[37m
+         # To get your HostID, log on http://www.stats.clamav.net and add a new[0m[32m
+    - restore selinux security context[0m
+[0m
+Chef Client finished, 2 resources updated[0m

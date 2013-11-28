@@ -5,6 +5,7 @@
   "description":"rfa webserver first setup(before domain fix)",
   "run_list": [
         "recipe[yum::epel]",
+        "recipe[yum::remi]",
         "recipe[apache2]",
         "recipe[php]",
         "recipe[php::module_mysql]",
