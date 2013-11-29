@@ -8,7 +8,7 @@
 #
 
 #ログディレクトリ作成
-directory "#{node['console_logging']['logdir']}" do
+directory "#{node['console-logging']['logdir']}" do
   recursive true
   mode 0755
   action :create
