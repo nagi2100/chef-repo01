@@ -1,0 +1,8 @@
+{
+  "clamav" : {
+    "private_mirror_ip" : "10.31.11.73"
+  },
+  "run_list" : [
+    "role[clamav-local]"
+  ]
+}

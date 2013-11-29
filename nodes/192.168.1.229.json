@@ -1,0 +1,8 @@
+{
+  "console-logging" : {
+    "logdir" : "/tmp/logs/script_logs"
+  },
+  "run_list" : [
+    "recipe[console-logging]"
+  ]
+}
