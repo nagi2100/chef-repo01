@@ -1,8 +1,5 @@
 {
-  "console-logging" : {
-    "logdir" : "/var/log/console"
-  },
   "run_list" : [
-    "recipe[console-logging]"
+    "recipe[bind]"
   ]
 }
