@@ -1,1 +1,1 @@
-default['console-logging']['logdir'] = '/tmp/logs/script_logs'
+default['console-logging']['logdir'] = '/var/log/script_logs'

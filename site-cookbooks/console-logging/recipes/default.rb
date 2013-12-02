@@ -10,7 +10,7 @@
 #ログディレクトリ作成
 directory "#{node['console-logging']['logdir']}" do
   recursive true
-  mode 0755
+  mode 0777
   action :create
 end
 
