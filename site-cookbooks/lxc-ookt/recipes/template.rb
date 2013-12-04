@@ -7,6 +7,9 @@
 # All rights reserved - Do Not Redistribute
 #
 cookbook_file "lxc-centos" do
-  path "/tmp/lxc-centos"
+  path "/usr/lib/lxc/templates/lxc-centos"
+  owner  "root"
+  group  "root"
+  mode 0755
   action :create_if_missing
 end
