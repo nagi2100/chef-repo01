@@ -3,12 +3,12 @@
     "hostip" : "192.168.1.223",
     "hostmask" : "255.255.255.0",
     "hostgw" : "192.168.1.1",
-    "dist" : "ubuntu",
-    "contname" : "lxctest01",
-    "ip" : "192.168.1.213",
+    "dist" : "centos",
+    "contname" : "inokappa4",
+    "ip" : "192.168.1.215",
     "prefix" : "24"
   },
   "run_list" : [
-    "recipe[lxc-ookt::add-with-bridge]"
+    "recipe[lxc-ookt::install]"
   ]
 }
