@@ -29,7 +29,7 @@
 arch=$(arch)
 cache_base=/var/cache/lxc/centos/$arch
 default_path=/var/lib/lxc
-root_password=password
+root_password=zaq12wsx
 
 # is this centos?
 [ -f /etc/redhat-release ] && is_centos=true
@@ -164,7 +164,8 @@ download_centos()
             echo "Failed to get a mirror"
             continue
         fi
-        RELEASE_URL="$MIRROR_URL/Packages/centos-release-$release-$releaseminor.el6.centos.9.$arch.rpm"
+#        RELEASE_URL="$MIRROR_URL/Packages/centos-release-$release-$releaseminor.el6.centos.9.$arch.rpm"
+	RELEASE_URL="http://mirror.fairway.ne.jp/centos/6.4/os/x86_64/Packages/centos-release-6-4.el6.centos.10.x86_64.rpm"
         echo "Fetching from $RELEASE_URL"
         curl -f "$RELEASE_URL" > $INSTALL_ROOT/centos-release-$release-$releaseminor.centos.$arch.rpm
         if [ $? -ne 0 ]; then
