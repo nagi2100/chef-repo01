@@ -1,8 +1,8 @@
 {
   "lxc-ookt" : {
     "dist" : "centos",
-    "contname" : "inokappa3",
-    "ip" : "192.168.1.217",
+    "contname" : "inokappa4",
+    "ip" : "192.168.1.215",
     "prefix" : "24"
   },
   "run_list" : [
