@@ -7,8 +7,8 @@
 # All rights reserved - Do Not Redistribute
 #
 
-dist = "#{node['lxc-ookt']['dist']}"
-contname = "#{node['lxc-ookt']['contname']}"
+dist = "#{node['st-lxc']['dist']}"
+contname = "#{node['st-lxc']['contname']}"
 
 #lxc-veth配置
 template "lxc-veth.conf" do
@@ -21,10 +21,12 @@ end
 execute "lxc-create" do
   user 'root'
   command "lxc-create -t #{dist} -n #{contname} -f /tmp/lxc-veth.conf"
+  not_if { File.exists?("/var/lib/lxc/#{contname}") }
 end
 
 #コンテナ起動
 execute "lxc-start" do
   user 'root'
   command "lxc-start -n #{contname} -d"
+  not_if "lxc-info | grep #{contname} | grep 'STOPPED'" 
 end

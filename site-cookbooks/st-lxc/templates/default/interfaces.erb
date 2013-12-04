@@ -11,9 +11,9 @@ iface lo inet loopback
 #iface eth0 inet static
 auto br0
 iface br0 inet static
-address <%= node['lxc-ookt']['hostip'] %>
-netmask <%= node['lxc-ookt']['hostmask'] %>
-gateway <%= node['lxc-ookt']['hostgw'] %>
+address <%= node['st-lxc']['hostip'] %>
+netmask <%= node['st-lxc']['hostmask'] %>
+gateway <%= node['st-lxc']['hostgw'] %>
 dns-nameservers 8.8.8.8
 bridge_ports eth0
 bridge_stp off
