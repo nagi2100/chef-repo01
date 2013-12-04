@@ -9,8 +9,8 @@
     "prefix" : "24"
   },
   "run_list" : [
-    "recipe[lxc-ookt::install]"
-    "recipe[lxc-ookt::template]"
+    "recipe[lxc-ookt::install]",
+    "recipe[lxc-ookt::template]",
     "recipe[lxc-ookt::createcont]"
   ]
 }
