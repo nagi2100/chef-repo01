@@ -9,6 +9,6 @@
     "prefix" : "24"
   },
   "run_list" : [
-    "recipe[lxc-ookt::template]"
+    "recipe[lxc-ookt::add-with-bridge]"
   ]
 }
