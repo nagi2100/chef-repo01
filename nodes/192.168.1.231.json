@@ -1,0 +1,11 @@
+{
+  "lxc-ookt" : {
+    "dist" : "centos",
+    "contname" : "inokappa3",
+    "ip" : "192.168.1.217",
+    "prefix" : "24"
+  },
+  "run_list" : [
+    "recipe[lxc-ookt::add-with-bridge]"
+  ]
+}
