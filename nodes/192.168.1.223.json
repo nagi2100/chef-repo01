@@ -4,7 +4,7 @@
     "hostmask" : "255.255.255.0",
     "hostgw" : "192.168.1.1",
     "dist" : "centos",
-    "contname" : "lxctest03",
+    "contname" : "lxctest05",
     "ip" : "192.168.1.215",
     "prefix" : "24"
   },
