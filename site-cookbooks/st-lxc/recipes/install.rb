@@ -12,24 +12,3 @@
     action :install
   end
 end
-
-#br0設定
-template "/etc/network/interfaces" do
-  path "/etc/network/interfaces"
-  source "interfaces.erb"
-  mode 0644
-  only_if { File.exists?("/etc/network/interfaces") }
-end
-
-#ネットワークサービス再起動
-service "networking" do
-  provider Chef::Provider::Service::Init::Debian
-  action :restart
-end
-
-# ufw設定ファイルの変更
-execute "modify ufw" do
-  user    'root'
-  command "sed -i 's/^DEFAULT_FORWARD_POLICY=\"DROP\"/DEFAULT_FORWARD_POLICY=\"ACCEPT\"/g' /etc/default/ufw"
-  only_if { File.exists?("/etc/default/ufw") }
-end
