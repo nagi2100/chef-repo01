@@ -4,8 +4,8 @@
     "hostmask" : "255.255.255.0",
     "hostgw" : "192.168.1.1",
     "dist" : "centos",
-    "contname" : "lxctest14",
-    "contip" : "192.168.1.214",
+    "contname" : "lxctest11",
+    "contip" : "192.168.1.211",
     "contprefix" : "24"
   },
   "run_list" : [
