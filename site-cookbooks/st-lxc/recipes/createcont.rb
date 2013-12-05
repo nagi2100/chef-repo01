@@ -28,5 +28,5 @@ end
 execute "lxc-start" do
   user 'root'
   command "lxc-start -n #{contname} -d"
-  not_if "lxc-info | grep #{contname} | grep 'STOPPED'" 
+  only_if "lxc-info | grep #{contname} | grep 'STOPPED'" 
 end
