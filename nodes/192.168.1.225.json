@@ -1,8 +1,5 @@
 {
-  "clamav" : {
-    "private_mirror_ip" : "192.168.1.225"
-  },
   "run_list" : [
-    "role[clamav-local]"
+    "recipe[subversion::server]"
   ]
 }
