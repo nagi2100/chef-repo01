@@ -1,0 +1,49 @@
+compatibility: whitetank
+
+totem {
+  version: 2
+  secauth: off
+  token: 2000
+  token_retransmits_before_loss_const: 10
+  interface {
+    <% node['corosync']['cluster_nodes'].each do |node| -%>
+    member {
+      memberaddr: <%= node['ip'] %>
+    } 
+    <% end -%>
+    ringnumber: 0
+    bindnetaddr: <%= node['corosync']['cluster_nodes_segment'] %>
+    mcastport: 5405
+    ttl: 1
+  }
+  transport: udpu
+}
+
+amf {
+  mode: disabled
+}
+
+service {
+  # Load the Pacemaker Cluster Resource Manager
+  ver: 0
+  name: pacemaker
+}
+
+aisexec {
+  user: root
+  group: root
+}
+
+logging {
+  fileline: off
+  to_logfile: yes
+  to_syslog: yes
+  logfile: /var/log/cluster/corosync.log
+  debug: off
+  timestamp: on
+  logger_subsys {
+    subsys: AMF
+    debug: off
+  }
+}
+

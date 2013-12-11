@@ -1,0 +1,17 @@
+{
+  "apache_template" : {
+    "template" : "*",
+    "mappings" : {
+      "apache" : {
+        "properties" : {
+          "agent" : { "type":"string", "index":"not_analyzed" },
+          "method" : { "type":"string", "index":"not_analyzed" },
+          "code" : { "type":"string", "index":"not_analyzed" },
+          "res_size" : { "type":"string" },
+          "req_size" : { "type":"integer" },
+          "response_time" : { "type":"integer" }
+         }
+      }
+    }
+  }
+}

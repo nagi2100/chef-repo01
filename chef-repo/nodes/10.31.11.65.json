@@ -1,0 +1,21 @@
+{
+  "mysql" : {
+    "server_root_password"   : "zaq12wsx",
+    "server_repl_password"   : "zaq12wsx",
+    "server_debian_password" : "zaq12wsx"
+  },
+  "common": {
+    "hostname":  "BR-13-1-D02-IMS-01",
+    "ipaddress": "10.31.11.65"
+  },
+  "clamav" : {
+    "private_mirror_ip" : "10.31.11.73"
+  },
+  "run_list": [
+    "role[pandorafms]",
+    "role[br_fluentd_client]",
+    "recipe[common]",
+    "recipe[aaa-client]",
+    "role[clamav-local]"
+  ]
+}

@@ -1,0 +1,5 @@
+<% unless node[:postfix][:virtual].each.nil?  %>
+<% node[:postfix][:virtual].each do |k, v| %>
+<%= "#{k} = #{v}" %>
+<% end %>
+<% end %>

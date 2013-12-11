@@ -1,0 +1,12 @@
+{
+  "st-lxc" : {
+    "dist" : "centos",
+    "contname" : "lxctest001",
+    "contip" : "10.218.240.51",
+    "contprefix" : "24",
+    "contif" : "eth0.1110"
+  },
+  "run_list" : [
+    "role[createlxc]"
+  ]
+}

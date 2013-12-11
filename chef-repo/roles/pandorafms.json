@@ -1,0 +1,26 @@
+{
+  "name"         : "pandorafms",
+  "description"  : "pandorafms",
+  "chef_type"    : "role",
+  "json_class"   : "Chef::Role",
+  "override_attributes" : {
+    "iptables": {
+      "allow_list" : [
+        "-A INPUT -m state --state NEW -m tcp -p tcp --dport 80 -j ACCEPT"
+      ]
+    },
+    "pandorafms": {
+      "mysql_root_password" : "pandora123"
+    }
+  },
+  "run_list" : [ 
+    "recipe[iptables]",
+    "recipe[yum::epel]",
+    "recipe[yum::remi]",
+    "recipe[mysql::server]",
+    "recipe[pandorafms]"
+  ],
+  "env_run_lists" : {
+  }
+}
+

@@ -1,0 +1,25 @@
+{
+  "name"         : "base",
+  "description"  : "基本設定",
+  "chef_type"    : "role",
+  "json_class"   : "Chef::Role",
+  "defaulte_attributes" : {
+    "nameservers"  : ["8.8.8.8"],
+    "ntp"          : { "servers" : ["ntp.nict.jp", "ntp.jst.mfeed.ad.jp", "ntp.shoshin.co.jp"] },
+    "timezone"     : { "area" : "Asia/Tokyo" },
+    "i18n"         : { "lang" : "ja_JP.UTF-8" }
+  },
+  "run_list" : [ 
+    "recipe[dns]",
+    "recipe[yum::epel]",
+    "recipe[user]",
+    "recipe[vim]",
+    "recipe[screen]",
+    "recipe[ntp]",
+    "recipe[timezone]",
+    "recipe[i18n]"
+  ],
+  "env_run_lists" : {
+  }
+}
+

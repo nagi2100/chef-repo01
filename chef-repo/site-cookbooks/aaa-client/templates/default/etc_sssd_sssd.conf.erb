@@ -1,0 +1,34 @@
+[domain/eigyo.co.jp]
+cache_credentials = True
+krb5_store_password_if_offline = True
+ipa_domain = eigyo.co.jp
+id_provider = ipa
+auth_provider = ipa
+access_provider = ipa
+ipa_hostname = <%= node[:common][:fqdn].downcase %>
+chpass_provider = ipa
+ipa_server = _srv_, br-13-1-d02-aaa-02.eigyo.co.jp, br-13-1-d02-aaa-01.eigyo.co.jp
+ldap_tls_cacert = /etc/ipa/ca.crt
+# configure SUDO and GSSAPI authentication
+sudo_provider = ldap
+ldap_uri = ldap://br-13-1-d02-aaa-02.eigyo.co.jp, ldap://br-13-1-d02-aaa-01.eigyo.co.jp
+ldap_sudo_search_base = ou=sudoers,dc=eigyo,dc=co,dc=jp
+ldap_sasl_mech = GSSAPI
+ldap_sasl_authid = host/<%= node[:common][:fqdn].downcase %>
+ldap_sasl_realm = EIGYO.CO.JP
+krb5_server = br-13-1-d02-aaa-02.eigyo.co.jp, br-13-1-d02-aaa-01.eigyo.co.jp
+[sssd]
+services = nss, pam, sudo, ssh
+config_file_version = 2
+domains = eigyo.co.jp
+[nss]
+
+[pam]
+
+[sudo]
+
+[autofs]
+
+[ssh]
+
+[pac]

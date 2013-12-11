@@ -1,0 +1,27 @@
+{
+  "name"         : "rfa",
+  "description"  : "RFA構築用",
+  "chef_type"    : "role",
+  "json_class"   : "Chef::Role",
+  "override_attributes" : {
+    "postfix": {
+      "main": {
+        "myorigin":           "$mydomain",
+        "inet_interfaces":    "all",
+        "mydestination":      "$myhostname, localhost.$mydomain, localhost, $mydomain",
+        "virtual_alias_maps": "hash:/etc/postfix/virtual",
+        "mynetworks":         "localhost",
+        "home_mailbox":       "Maildir/"
+      }
+    }
+  },
+  "run_list" : [ 
+    "recipe[postfix::server]",
+    "recipe[postfix::aliases]",
+    "recipe[postfix::virtual]",
+    "recipe[postfix::directorysetup]"
+  ],
+  "env_run_lists" : {
+  }
+}
+

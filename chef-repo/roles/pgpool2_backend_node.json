@@ -1,0 +1,45 @@
+{
+  "name"         : "pgpool2_backend_node",
+  "description"  : "pgpool2のバックエンドノードのinstall",
+  "chef_type"    : "role",
+  "json_class"   : "Chef::Role",
+  "override_attributes" : {
+    "postgresql" : {
+      "dir":                   "/usr/local/pgsql/data",
+      "wal_archive_dir":       "/usr/local/pgsql/wal_archive/",
+      "password": {
+        "postgres":            "md5f77edd461cb7b9ae3db5932148051ac8"
+      },
+      "config" : {
+        "lc_messages":         "ja_JP.UTF-8",
+        "lc_monetary":         "ja_JP.UTF-8",
+        "lc_numeric":          "ja_JP.UTF-8",
+        "lc_time":             "ja_JP.UTF-8",
+        "listen_addresses":    "*",
+        "archive_mode":        true,
+        "archive_command":     "cp \"%p\" /usr/local/pgsql/wal_archive/\"%f\"",
+        "log_directory":       "/var/log/pgsql",
+        "log_filename":        "postgresql-%Y-%m-%d.log",
+        "log_line_prefix":     "[%t][%p][%c][%u][%d] ",
+        "log_destination":     "stderr"
+      },
+      "pg_hba": [
+        {"type": "host", "db": "all", "user": "postgres", "addr": "192.168.56.0/24", "method": "trust"}
+      ]
+    },
+    "iptables": {
+      "allow_list" : [
+        "-A INPUT -m state --state NEW -m tcp -p tcp --dport 5432 -j ACCEPT"
+      ]
+    }
+  },
+  "run_list" : [ 
+    "recipe[iptables]",
+    "recipe[postgresql::pre_server]",
+    "recipe[postgresql::server]",
+    "recipe[pgpool2::create_function]"
+  ],
+  "env_run_lists" : {
+  }
+}
+

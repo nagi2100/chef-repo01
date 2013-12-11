@@ -1,0 +1,32 @@
+{
+  "name"         : "br_ha_mysql",
+  "description"  : "BR用mysql + corosync冗長構成",
+  "chef_type"    : "role",
+  "json_class"   : "Chef::Role",
+  "override_attributes" : {
+    "corosync" : {
+      "cluster_nodes" : [
+        {"ip" : "10.31.11.33", "hostname" : "br-13-1-d02-dat-01"},
+        {"ip" : "10.31.11.34", "hostname" : "br-13-1-d02-dat-02"}
+      ],
+      "cluster_nodes_segment" : "10.31.11.0",
+      "ha_mysql" : {
+        "replication_allow_host"  : '10.31.11.%',
+        "default_master_hostname" : 'br-13-1-d02-dat-01',
+        "master_vip" : {
+          "ip"        : "10.21.12.65",
+          "nic"       : "bond0.2112",
+          "netmask"   : "24",
+          "broadcast" : "10.21.12.255"
+        }
+      }
+    }
+  },
+  "run_list" : [ 
+    "recipe[corosync]",
+    "recipe[corosync::ha_mysql]"
+  ],
+  "env_run_lists" : {
+  }
+}
+

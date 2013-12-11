@@ -1,0 +1,9 @@
+{
+  "name":"createlxc",
+  "chef_type": "role",
+  "json_class":"Chef::Role",
+  "description":"create lxc",
+  "run_list": [
+        "recipe[st-lxc::createcont]"
+        ]
+}

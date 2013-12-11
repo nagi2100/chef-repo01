@@ -1,0 +1,13 @@
+defencoding UTF-8
+escape ^z^z
+bind s
+vbell off
+
+caption always "%{b bw} %?%h%:%t (screen #%n)%?"
+hardstatus alwayslastline "%`%-w%{ub bw}%n %t%{-}%+w %= %{dw} %y/%m/%d %c:%s"
+
+bindkey "\033[1;5C" next
+bindkey "\033[1;5D" prev
+termcapinfo xterm "ks=\E[?1l\E:ku=\E[A:kd=\E[B:kl=\E[D:kr=\E[C:kh=\E[5~:kH=\E[F"
+
+defscrollback 4000

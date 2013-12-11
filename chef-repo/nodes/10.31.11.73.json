@@ -1,0 +1,24 @@
+{
+  "common": {
+    "hostname":  "BR-13-1-D02-STR-01",
+    "ipaddress": "10.31.11.73"
+  },
+  "iptables" : {
+    "add_lines" : [
+      {
+       "before_pos" : "-A INPUT -j REJECT --reject-with icmp-host-prohibited",
+       "add"        : "-A INPUT -m state --state NEW -m tcp -p tcp --dport 80 -s 10.31.11.0/24 -j ACCEPT"
+      }
+    ]
+  },
+  "clamav" : {
+    "httpd_allow_ip" : "10.31.11.0/24",
+    "private_mirror_ip" : "10.31.11.73"
+  },
+  "run_list": [
+    "role[clamav-repo]",
+    "recipe[common]",
+    "recipe[aaa-client]",
+    "role[br_fluentd_client]"
+  ]
+}

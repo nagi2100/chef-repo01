@@ -1,0 +1,31 @@
+# ---------- this client side config ----------
+<source>
+  type config_expander
+  <config>
+    type tail
+    format syslog
+    pos_file /var/log/td-agent/pos/syslog.pos
+    path /var/log/messages
+    tag forwarded_logs/${hostname}/syslog
+  </config>
+</source>
+
+<source>
+  type config_expander
+  <config>
+    type tail
+    format syslog
+    pos_file /var/log/td-agent/pos/secure.pos
+    path /var/log/secure
+    tag forwarded_logs/${hostname}/secure
+  </config>
+</source>
+
+<match forwarded_logs/**/*>
+  type forward
+  <server>
+    host <%= node[:td_agent][:forward_server] %>
+    flush_interval 10s
+    flush_at_shutdown true
+  </server>
+</match>

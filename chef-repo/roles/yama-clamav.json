@@ -1,0 +1,21 @@
+{
+  "name"         : "yama-clamav",
+  "description"  : "install clamav(yamaya Ver.)",
+  "chef_type"    : "role",
+  "json_class"   : "Chef::Role",
+  "override_attributes" : {
+    "clamav": {
+      "exclude_list": [
+        "/proc/",
+        "/sys/"
+      ]
+    }
+  },
+  "run_list" : [ 
+    "recipe[clamav]",
+    "recipe[clamav::setup]"
+  ],
+  "env_run_lists" : {
+  }
+}
+

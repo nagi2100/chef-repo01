@@ -1,0 +1,11 @@
+{
+  "name":"setuplxc",
+  "chef_type": "role",
+  "json_class":"Chef::Role",
+  "description":"setup lxc",
+  "run_list": [
+        "recipe[st-lxc::install]",
+        "recipe[st-lxc::template]",
+        "recipe[st-lxc::bridge]"
+        ]
+}

@@ -1,0 +1,24 @@
+{
+  "name"         : "br_fluentd_server",
+  "description"  : "BR用fluentd(server)のinstall",
+  "chef_type"    : "role",
+  "json_class"   : "Chef::Role",
+  "override_attributes" : {
+    "td_agent" : {
+      "plugins"    : ["forest","config-expander"]
+    },
+    "iptables": {
+      "allow_list" : [
+        "-A INPUT -m state --state NEW -m tcp -p tcp --dport 24224 -j ACCEPT",
+        "-A INPUT -m state --state NEW -m udp -p udp --dport 24224 -j ACCEPT"
+      ]
+    }
+  },
+  "run_list" : [ 
+    "recipe[iptables]",
+    "recipe[td-agent::br_server]"
+  ],
+  "env_run_lists" : {
+  }
+}
+

@@ -1,0 +1,11 @@
+{
+  "ssl" : {
+    "ssl_pp" : "7psYxlKC9RyjyV6KVHKp9qUu0gWuxvDX",
+    "ssl_dir" : "/var/www/rfa",
+    "ssl_domain" : "kazoku-lion.com",
+    "ssl_log_domain" : "rfa"
+  },
+"run_list" : [
+       "recipe[ssl]"
+]
+}

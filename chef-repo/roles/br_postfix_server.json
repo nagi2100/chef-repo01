@@ -1,0 +1,25 @@
+{
+  "name"         : "br_postfix_server",
+  "description"  : "BRメールサーバ",
+  "chef_type"    : "role",
+  "json_class"   : "Chef::Role",
+  "override_attributes" : {
+    "postfix": {
+      "main": {
+        "myorigin":           "$mydomain",
+        "mynetworks":         "127.0.0.0/8, 10.11.11.0/24",
+        "mydestination":      "$myhostname, localhost.$mydomain, localhost, $mydomain",
+        "inet_interfaces":    "all",
+        "inet_protocols":     "ipv4",
+        "smtp_use_tls":       "no",
+        "smtpd_use_tls":      "no"
+      }
+    }
+  },
+  "run_list" : [ 
+    "recipe[postfix::server]"
+  ],
+  "env_run_lists" : {
+  }
+}
+

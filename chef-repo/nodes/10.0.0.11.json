@@ -1,0 +1,12 @@
+{
+  "common": {
+      "hostname": "BR-13-1-D02-AAA-01",
+      "ipaddress": "10.0.0.11"
+  },
+  "run_list":
+    [
+      "common",
+      "aaa-service",
+      "aaa-clint"
+    ]
+}

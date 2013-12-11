@@ -1,0 +1,10 @@
+{
+  "name":"clamav-repo",
+  "chef_type": "role",
+  "json_class":"Chef::Role",
+  "description":"setup clamav local repository",
+  "run_list": [
+        "recipe[yum::epel]",
+        "recipe[clamav]"
+        ]
+}
