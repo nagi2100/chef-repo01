@@ -1,0 +1,13 @@
+{
+  "common": {
+    "hostname":  "L-VIRT-IMSC-01",
+    "ipaddress": "10.218.240.201",
+    "domain":    "steady-inc.net",
+    "fqdn":      "L-VIRT-IMSC-01.steady-inc.net"
+  },
+  "run_list": [
+    "recipe[common]",
+    "recipe[aaa-client]",
+    "recipe[pandorafms::console]"
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "common": {
+    "hostname":  "L-VIRT-AAAI-01",
+    "ipaddress": "10.218.240.185",
+    "domain":    "steady-inc.net",
+    "fqdn":      "L-VIRT-AAAI-01.steady-inc.net"
+  },
+  "aaa-service": {
+    "dirsrv": {
+      "slapd_dir":  "slapd-STEADY-INC-NET"
+    }
+  },
+  "run_list": [
+    "recipe[common]",
+    "recipe[aaa-service]"
+  ]
+}
