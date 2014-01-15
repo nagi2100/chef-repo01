@@ -11,8 +11,12 @@
   "clamav" : {
     "private_mirror_ip" : "10.31.11.73"
   },
+  "pandorafms" : {
+    "pandora_server_ip":  "10.31.11.65"
+  }
   "run_list": [
     "role[pandorafms]",
+    "recipe[pandorafms::agent]",
     "role[br_fluentd_client]",
     "recipe[common]",
     "recipe[aaa-client]",
