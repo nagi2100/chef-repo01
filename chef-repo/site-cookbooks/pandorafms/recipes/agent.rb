@@ -18,6 +18,7 @@ end
 template "/etc/pandora/pandora_agent.conf" do
   source "pandora_agent.conf.erb"
   notifies :restart, 'service[pandora_agent_daemon]'
+  manage_symlink_source true
 end
 
 service "pandora_agent_daemon" do

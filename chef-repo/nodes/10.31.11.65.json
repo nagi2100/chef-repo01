@@ -13,7 +13,7 @@
   },
   "pandorafms" : {
     "pandora_server_ip":  "10.31.11.65"
-  }
+  },
   "run_list": [
     "role[pandorafms]",
     "recipe[pandorafms::agent]",
