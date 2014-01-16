@@ -20,6 +20,9 @@
       "mydomain"   : "mail.eigyo.co.jp"
     }
   },
+  "pandorafms" : {
+    "pandora_server_ip":      "10.31.11.65"
+  },
   "run_list": [
     "yum::epel",
     "yum::remi",
@@ -27,9 +30,10 @@
     "aaa-client",
     "php",
     "web-application",
-    "recipe[clamav]",
     "recipe[iptables::add_line]",
     "role[br_postfix_server]",
-    "role[br_fluentd_client]"
+    "role[br_fluentd_client]",
+    "role[clamav-local]",
+    "recipe[pandorafms::agent]"
   ]
 }

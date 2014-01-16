@@ -68,10 +68,10 @@ while (my ($filesystem, $use) = each (%filesystems)) {
 
 	# Print module output
 	print "<module>\n";
-	print "<name><![CDATA[" . $filesystem . "]]></name>\n";
+	print "<name><![CDATA[Disk Usage (" . $filesystem . ")]]></name>\n";
 	print "<type><![CDATA[generic_data]]></type>\n";
 	print "<data><![CDATA[" . $use . "]]></data>\n";
-	print "<description>% of usage in this volume</description>\n";
+	print "<description>Disk Usage (%)</description>\n";
 	print "</module>\n";
 }
 

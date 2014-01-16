@@ -157,7 +157,7 @@ remote_config 0
 
 # vmstat syntax depends on linux distro and vmstat command version, please check before use it
 module_begin 
-module_name cpu_user
+module_name User CPU Usage
 module_type generic_data
 module_interval 1
 module_exec vmstat 1 2 | tail -1 | awk '{ print $13 }'
@@ -180,60 +180,60 @@ module_description Average process in CPU (Last minute)
 module_end
 
 #Get free memory in MB
-module_begin
-module_name Cache mem free
-module_type generic_data
-module_exec free -m | grep buffers/cache | awk '{print $4}'
-module_description Free cache memory in MB
-module_min_warning 500
-module_max_warning 600
-module_min_critical 100
-module_max_critical 499
-module_unit MB
-module_end
+#module_begin
+#module_name Cache mem free
+#module_type generic_data
+#module_exec free -m | grep buffers/cache | awk '{print $4}'
+#module_description Free cache memory in MB
+#module_min_warning 500
+#module_max_warning 600
+#module_min_critical 100
+#module_max_critical 499
+#module_unit MB
+#module_end
 
 #Count total number of processes
-module_begin
-module_name proctotal
-module_type generic_data
-module_exec ps -A | tail --lines=+5 | wc -l
-module_description Total processes
-module_min_warning 150
-module_max_warning 249
-module_min_critical 250
-module_max_critical 300
-module_unit processes
-module_end
+#module_begin
+#module_name proctotal
+#module_type generic_data
+#module_exec ps -A | tail --lines=+5 | wc -l
+#module_description Total processes
+#module_min_warning 150
+#module_max_warning 249
+#module_min_critical 250
+#module_max_critical 300
+#module_unit processes
+#module_end
 
 # Process information
 
-module_begin
-module_name sshDaemon
-module_type generic_proc
-module_exec ps -Af | grep sshd | grep -v "grep" | wc -l
-module_description Check ssh service
-module_end
+#module_begin
+#module_name sshDaemon
+#module_type generic_proc
+#module_exec ps -Af | grep sshd | grep -v "grep" | wc -l
+#module_description Check ssh service
+#module_end
 
 # Async data example
  
-module_begin
-module_name LastLogin
-module_type async_string
-module_exec last | head -1
-module_description Monitor last user loggin
-module_end 
+#module_begin
+#module_name LastLogin
+#module_type async_string
+#module_exec last | head -1
+#module_description Monitor last user loggin
+#module_end 
 
 # Module that get the number of cron file 
 # This module uses a precondition, if cron is running the 
 # module will check the folder /etc/cron.d to get the number of files
-module_begin
-module_name Cron task files
-module_type async_string
-module_precondition =~ .*cron.* ps aux | grep cron
-module_exec ls -l /etc/cron.d | awk 'NR>1 {print $0}' | wc -l
-module_description Number of cron task files
-module_unit files
-module_end
+#module_begin
+#module_name Cron task files
+#module_type async_string
+#module_precondition =~ .*cron.* ps aux | grep cron
+#module_exec ls -l /etc/cron.d | awk 'NR>1 {print $0}' | wc -l
+#module_description Number of cron task files
+#module_unit files
+#module_end
 
 
 # Plugin example
@@ -241,6 +241,8 @@ module_end
 # This plugin detects all disk partitions and monitor the free spaces
 
 module_plugin pandora_df_custom
+
+module_plugin memory_usage
 
 # This parses /var/log/syslog file, under the module name "syslog"
 # And search for "ssh" string into it, sending only that information.
@@ -301,3 +303,12 @@ module_plugin grep_log /var/log/syslog Syslog ssh
 #module_exec echo 5
 #module_description Postcondition test module
 #module_end
+
+<% if defined?(node[:pandorafms][:check_mysql_replication]) && node[:pandorafms][:check_mysql_replication] == true %>
+# check MySQL replication status
+module_begin
+module_name MySQL Replication
+module_type generic_proc
+module_exec /etc/pandora/plugins/mysql_replication_status
+module_end
+<% end %>

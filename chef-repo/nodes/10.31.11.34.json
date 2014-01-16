@@ -14,13 +14,18 @@
       "postgres": "eMntlJOJ9kSLgAytlxEGMWIkA0prTWus"
     }
   },
+  "pandorafms" : {
+    "pandora_server_ip":      "10.31.11.65",
+    "check_mysql_replication": true
+  },
   "run_list": [
     "yum::epel",
     "yum::remi",
     "common",
     "aaa-client",
     "mysql::server",
-    "recipe[clamav]",
-    "role[br_fluentd_client]"
+    "role[clamav-local]",
+    "role[br_fluentd_client]",
+    "recipe[pandorafms::agent]"
   ]
 }

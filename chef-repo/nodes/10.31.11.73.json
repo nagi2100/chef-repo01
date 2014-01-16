@@ -15,10 +15,14 @@
     "httpd_allow_ip" : "10.31.11.0/24",
     "private_mirror_ip" : "10.31.11.73"
   },
+  "pandorafms" : {
+    "pandora_server_ip":  "10.31.11.65"
+  },
   "run_list": [
     "role[clamav-repo]",
     "recipe[common]",
     "recipe[aaa-client]",
-    "role[br_fluentd_client]"
+    "role[br_fluentd_client]",
+    "recipe[pandorafms::agent]"
   ]
 }
