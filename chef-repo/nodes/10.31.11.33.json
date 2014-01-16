@@ -15,7 +15,8 @@
     }
   },
   "pandorafms" : {
-    "pandora_server_ip":      "10.31.11.65"
+    "pandora_server_ip":      "10.31.11.65",
+    "my_ip":                  "10.31.11.33"
   },
   "run_list": [
     "yum::epel",

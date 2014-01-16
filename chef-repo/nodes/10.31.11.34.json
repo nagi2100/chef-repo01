@@ -16,6 +16,7 @@
   },
   "pandorafms" : {
     "pandora_server_ip":      "10.31.11.65",
+    "my_ip":                  "10.31.11.34",
     "check_mysql_replication": true
   },
   "run_list": [
