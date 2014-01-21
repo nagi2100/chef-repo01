@@ -6,7 +6,14 @@
   },
   "common": {
     "hostname":  "BR-13-1-D02-IMS-01",
-    "ipaddress": "10.31.11.65"
+    "ipaddress": "10.31.11.65",
+    "hosts": {
+      "static_resolve": [
+        {"comment":   "AAA1/2のns.eigyo.co.jpのレコードが無く名前引き出来ないので設定",
+         "ipaddress": "183.182.46.48",
+         "hostname":  "smart.brpayment.jp" }
+      ]
+    }
   },
   "clamav" : {
     "private_mirror_ip" : "10.31.11.73"
