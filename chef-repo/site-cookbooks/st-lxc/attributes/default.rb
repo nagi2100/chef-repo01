@@ -1,0 +1,7 @@
+default['st-lxc']['hostip'] = '192.168.1.223'
+default['st-lxc']['hostmask'] = '255.255.255.0'
+default['st-lxc']['hostgw'] = '192.168.1.1'
+default['st-lxc']['dist'] = 'ubuntu'
+default['st-lxc']['contname'] = 'hoge3'
+default['st-lxc']['contip'] = '192.168.1.218'
+default['st-lxc']['contprefix'] = '24'

@@ -1,0 +1,9 @@
+{
+  "id": "john",
+  "ssh_keys": "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAgEAvq5Waie17KGLin7Db/lIPgZk77/F7sa4lZ1/Oyjlk7YZB3U7VrBKDUMptjOghnN3emL+EoVaJZO0giopw5qSkMpoglgM/sa9+vs665Hv/rMQAGRMsU+C7v0I/NI7P+JcP2rwJHVAC1aCnlt9zlH7hGBmRHvIkno9vS3gGeGUeq58WmJ7DUkc1GVWHMo349GSNgN6btB1cn4vMCQPhfkL9Y0oH6rwYyONqhga0Tgkf3aLEBTvtOvtPdyYETwQFiMmGAw293I8Ugzw8+ulXvi3WztCaZ4vJODAs2Cx29sR0ltaJP8aM4quJAVH9tW33vSZ+2QMgJ9BXorbZ8hnCFSRkFpqxLKiSYrvX8ZdlHT0RP9vQLlJf2jbBJ/m8iHrxqsl6k7bRmUNf5DhVSPjZoDcuZztcmIjZQFbcAx5EeCFP+kVkLI3j6/4wA6C+b9BtUlmu3+ZLnSJEl/XNNyxLD6YcozKEI23qVpqaj9CW8foeqPDiU5gni7SpJZ+qKOB55ngVVyiQjucvm3qVYGSQCBKs8V8w1mKN1oDj1I9bdNeLKa7c1JeiawatcqYhp+JQo+iwCUBeMzKyMVjLIjE3Hnep0aJQ6dnWCvhkOy6p9tljgPRqriC9KHX/fpe2MnwfChgP4aG4XFiQl+gwAvIxXYVH0YDnAFeymV4/skmy+d3qOM=",
+  "group": "wheel",
+  "uid": 2001,
+  "shell": "\/bin\/bash",
+  "comment": "John von Neumann",
+  "password": "$6$SteKrsIU3yIGpEZt$VP/PQizgMBQTl9k25PlY6e8p8.DVEmhi.nYLOAdTsJS3v1B8g8Ds/ffu1nmtTKYrP2NsC6sonO0QTpder4IOv."
+}

@@ -1,0 +1,20 @@
+# ---------- this server side config ----------
+<source>
+  type forward
+</source>
+
+<match forwarded_logs/**/*>
+  type forest
+  subtype file
+  <template>
+    path /var/log/td-agent/${tag}
+    time_slice_wait 10m
+    time_slice_format %Y%m%d
+#    output_include_time true
+#    output_include_tag  true
+#    output_data_type attr:host,ident,pid,message
+#    add_newline true
+#    field_separator SPACE
+#    localtime
+  </template>
+</match>

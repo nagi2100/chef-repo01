@@ -1,0 +1,11 @@
+{
+  "name":"setuplxcovs",
+  "chef_type": "role",
+  "json_class":"Chef::Role",
+  "description":"setup lxc with ovs",
+  "run_list": [
+        "recipe[st-lxc::install]",
+        "recipe[st-lxc::template]",
+        "recipe[ovs::install]"
+        ]
+}

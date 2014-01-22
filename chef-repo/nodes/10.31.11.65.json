@@ -1,0 +1,32 @@
+{
+  "mysql" : {
+    "server_root_password"   : "zaq12wsx",
+    "server_repl_password"   : "zaq12wsx",
+    "server_debian_password" : "zaq12wsx"
+  },
+  "common": {
+    "hostname":  "BR-13-1-D02-IMS-01",
+    "ipaddress": "10.31.11.65",
+    "hosts": {
+      "static_resolve": [
+        {"comment":   "AAA1/2のns.eigyo.co.jpのレコードが無く名前引き出来ないので設定",
+         "ipaddress": "183.182.46.48",
+         "hostname":  "smart.brpayment.jp" }
+      ]
+    }
+  },
+  "clamav" : {
+    "private_mirror_ip" : "10.31.11.73"
+  },
+  "pandorafms" : {
+    "pandora_server_ip":  "10.31.11.65"
+  },
+  "run_list": [
+    "role[pandorafms]",
+    "recipe[pandorafms::agent]",
+    "role[br_fluentd_client]",
+    "recipe[common]",
+    "recipe[aaa-client]",
+    "role[clamav-local]"
+  ]
+}

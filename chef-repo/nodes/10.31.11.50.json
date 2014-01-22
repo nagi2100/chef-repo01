@@ -1,0 +1,20 @@
+{
+  "common": {
+      "hostname": "BR-13-1-D02-AAA-02",
+      "ipaddress": "10.31.11.50"
+  },
+  "clamav" : {
+    "private_mirror_ip" : "10.31.11.73"
+  },
+  "pandorafms" : {
+    "pandora_server_ip":  "10.31.11.65"
+  },
+  "run_list": [
+    "common",
+    "aaa-service",
+    "aaa-client",
+    "role[br_fluentd_client]",
+    "role[clamav-local]",
+    "recipe[pandorafms::agent]"
+  ]
+}

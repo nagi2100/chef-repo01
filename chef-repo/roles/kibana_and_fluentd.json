@@ -1,0 +1,60 @@
+{
+  "name"         : "kibana_and_fluentd_server",
+  "description"  : "fluentdとデータストアのelasticsearch,フロントエンドkibanaのinstall",
+  "chef_type"    : "role",
+  "json_class"   : "Chef::Role",
+  "override_attributes" : {
+    "rvm" : {
+      "vagrant"       : {
+        "system_chef_solo"   : "/opt/chef/bin/chef-solo",
+        "system_chef_client" : "/opt/chef/bin/chef-client"
+      },
+      "default_ruby"  : "1.9.3",
+      "rubies"        : ["1.9.3"]
+    },
+    "java" : {"jdk_version" : "7"},
+    "elasticsearch" : {
+      "path" : {
+        "conf"     : "/usr/local/elasticsearch-0.90.5/config",
+        "data"     : "/var/lib/elasticsearch",
+        "logs"     : "/var/log/elasticsearch"
+      },
+      "bootstrap" : {
+        "mlockall" : false
+      },
+      "pid_path"   : "/var/run/elasticsearch"
+    },
+    "td_agent" : {
+      "plugins"    : ["elasticsearch"],
+      "es_port"    : "9200"
+    },
+    "kibana" : {
+      "user"  : "yamaya"
+    },
+    "iptables": {
+      "allow_list" : [
+        "-A INPUT -m state --state NEW -m tcp -p tcp --dport 80 -j ACCEPT",
+        "-A INPUT -m state --state NEW -m tcp -p tcp --dport 9200 -j ACCEPT"
+      ]
+    }
+  },
+  "run_list" : [ 
+    "recipe[iptables]",
+    "recipe[rvm::system]",
+    "recipe[rvm::vagrant]",
+    "recipe[rvm::after_setup_vagrant]",
+    "recipe[java]",
+    "recipe[elasticsearch]",
+    "recipe[elasticsearch::template]",
+    "recipe[nginx]",
+    "recipe[nginx::override_default_conf]",
+    "recipe[kibana]",
+    "recipe[kibana::override_nginx]",
+    "recipe[kibana::override_config_js]",
+    "recipe[td-agent]",
+    "recipe[td-agent::override_conf]"
+  ],
+  "env_run_lists" : {
+  }
+}
+

@@ -1,0 +1,2 @@
+<%= node['rfa-postfix']['account']['userid01'] %>:	<%= node['rfa-postfix']['account']['userfw01'] %>
+<%= node['rfa-postfix']['account']['userid02'] %>:	<%= node['rfa-postfix']['account']['userfw02'] %>

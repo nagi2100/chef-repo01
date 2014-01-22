@@ -1,0 +1,18 @@
+site :opscode
+
+cookbook 'rvm',            github: 'fnichol/chef-rvm'
+cookbook 'td-agent',       github: 'treasure-data/chef-td-agent'
+cookbook 'kibana',         github: 'nickpellant/chef-kibana'
+cookbook 'elasticsearch',  github: 'elasticsearch/cookbook-elasticsearch'
+##cookbook 'iptables'
+cookbook 'nginx'
+cookbook 'yum'
+cookbook 'php'
+cookbook 'users'
+cookbook 'chef-solo-search'
+cookbook 'ntp'
+cookbook 'postgresql'
+cookbook 'mysql'
+cookbook 'postfix'
+cookbook 'database'
+cookbook 'unbound'

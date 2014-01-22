@@ -1,0 +1,6 @@
+lxc.utsname = <%= node['lxc-ookt']['contname'] %>
+lxc.network.type=veth
+lxc.network.link=br0
+lxc.network.flags=up
+lxc.network.name=eth0
+lxc.network.ipv4=<%= node['lxc-ookt']['ip'] %>/<%= node['lxc-ookt']['prefix'] %>

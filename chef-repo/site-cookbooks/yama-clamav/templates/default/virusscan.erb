@@ -1,0 +1,29 @@
+#!/bin/bash
+
+PATH=/usr/bin:/bin
+
+# clamd update
+yum -y update clamd > /dev/null 2>&1
+
+# excludeopt setup
+excludelist=<%= node['clamav']['scan_exclude_config_path'] %>
+if [ -s $excludelist ]; then
+  for i in `cat $excludelist`
+  do
+    if [ $(echo "$i"|grep \/$) ]; then
+      i=`echo $i|sed -e 's/^\([^ ]*\)\/$/\1/p' -e d`
+      excludeopt="${excludeopt} --exclude-dir=^$i"
+    else
+      excludeopt="${excludeopt} --exclude=^$i"
+    fi
+  done
+fi
+
+# virus scan
+CLAMSCANTMP=`mktemp`
+clamscan --recursive --remove ${excludeopt} / > $CLAMSCANTMP 2>&1
+[ ! -z "$(grep FOUND$ $CLAMSCANTMP)" ] && \
+
+# report mail send
+grep FOUND$ $CLAMSCANTMP | mail -s "Virus Found in `hostname`" root
+rm -f $CLAMSCANTMP

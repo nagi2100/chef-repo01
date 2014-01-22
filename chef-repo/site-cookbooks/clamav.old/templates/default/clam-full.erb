@@ -1,0 +1,24 @@
+#!/bin/bash
+
+excludelist=<%= node['clamav']['scan_exclude_config_path'] %>
+logpath=<%= node['clamav']['log_path'] %>
+scanlogfile=<%= node['clamav']['clamscan_log_filename'] %>
+freshlogfile=<%= node['clamav']['freshclam_log_filename'] %>
+movepath=<%= node['clamav']['move_path'] %>
+
+/usr/bin/freshclam --quiet -l $logpath$freshlogfile
+
+#exclude setup
+if [ -s $excludelist ]; then
+  for i in `cat $excludelist`
+  do
+    if [ $(echo "$i"|grep \/$) ]; then
+      i=`echo $i|sed -e 's/^\([^ ]*\)\/$/\1/p' -e d`
+      excludeopt="${excludeopt} --exclude-dir=^$i"
+    else
+      excludeopt="${excludeopt} --exclude=^$i"
+    fi
+  done
+fi
+
+clamscan / --infected --recursive --move=$movepath --log=$logpath$scanlogfile ${excludeopt}

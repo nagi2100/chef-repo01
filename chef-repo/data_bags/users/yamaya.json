@@ -1,0 +1,7 @@
+{
+  "id": "yamaya",
+  "password": "$1$XHmdfmEP$hI/mtWvRrGSfBEHmLPjQr/",
+  "uid": 1100,
+  "shell": "\/bin\/bash",
+  "groups": ["developer"]
+}

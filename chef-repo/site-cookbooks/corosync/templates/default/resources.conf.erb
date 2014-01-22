@@ -1,0 +1,65 @@
+property no-quorum-policy="ignore" \
+  stonith-enabled="false" \
+  startup-fencing="false" \
+  stonith-timeout="300s" \
+  dc-deadtime="60s"
+
+rsc_defaults $id="rsc-options" \
+  resource-stickiness="INFINITY" \
+  migration-threshold="1"
+
+
+######################### master db configration #########################
+group g_db_master \
+  p_master_vip
+
+primitive p_master_vip ocf:heartbeat:IPaddr2 \
+  params \
+    ip="<%= node['corosync']['ha_mysql']['master_vip']['ip'] %>" \
+    nic="<%= node['corosync']['ha_mysql']['master_vip']['nic'] %>" \
+    cidr_netmask="<%= node['corosync']['ha_mysql']['master_vip']['netmask'] %>" \
+    broadcast="<%= node['corosync']['ha_mysql']['master_vip']['broadcast'] %>" \
+  op monitor interval="10s"
+
+
+######################### Master:Slave configration #########################
+primitive p_mysql ocf:heartbeat:mysql \
+  params config="<%= node['corosync']['ha_mysql']['config_path'] %>" \
+    pid="<%= node['mysql']['server']['pid_file'] %>" \
+    socket="<%= node['mysql']['server']['socket'] %>" \
+    max_slave_lag="30" \
+    evict_outdated_slaves="false" \
+    binary="/usr/bin/mysqld_safe" \
+    datadir="<%= node['mysql']['data_dir'] %>" \
+    test_user="<%= node['corosync']['ha_mysql']['select_only_user'] %>" \
+    test_passwd="<%= node['corosync']['ha_mysql']['select_only_user_password'] %>" \
+    replication_user="<%= node['corosync']['ha_mysql']['replication_user'] %>" \
+    replication_passwd="<%= node['corosync']['ha_mysql']['replication_user_password'] %>" \
+  op monitor interval="5s" role="Master" OCF_CHECK_LEVEL="1" \
+  op monitor interval="2s" role="Slave" OCF_CHECK_LEVEL="1" \
+  op promote interval="0s" timeout="90s" on-fail="restart" \
+  op demote interval="0s" timeout="90s" on-fail="block"
+
+ms ms_mysql p_mysql \
+  meta master-max="1" \
+  master-node-max="1" \
+  clone-max="2" \
+  clone-node-max="1" \
+  notify="true" \
+  globally-unique="false" \
+  target-role="Master" \
+  is-managed="true"
+
+
+colocation cl_db_master inf: g_db_master ms_mysql:Master
+
+
+location lc_db_master g_db_master \
+<%= node['corosync']['cluster_nodes'].map{ |e|
+      score = (e['hostname'] == node['corosync']['ha_mysql']['default_master_hostname'])? 200 : 100
+	  "  rule #{score}: #uname eq #{e['hostname']} "
+    }.join( "\\ \n" ) %>
+
+
+order or_master_db inf: ms_mysql:promote g_db_master:start
+

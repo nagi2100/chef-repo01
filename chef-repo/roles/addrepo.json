@@ -1,0 +1,12 @@
+{
+  "name":"repoadd",
+  "chef_type": "role",
+  "json_class":"Chef::Role",
+  "description":"add yum repository",
+  "run_list": [
+        "recipe[yum::epel]",
+        "recipe[yum::remi]",
+        "recipe[yum::repoforge]",
+        "recipe[st-yum::pandora]"
+        ]
+}

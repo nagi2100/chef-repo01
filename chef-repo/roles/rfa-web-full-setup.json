@@ -1,0 +1,15 @@
+{
+  "name":"rfa-web-first-setup",
+  "chef_type": "role",
+  "json_class":"Chef::Role",
+  "description":"rfa webserver&smtpserver full setup(domain fixed)",
+  "run_list": [
+        "recipe[yum::epel]",
+        "recipe[apache2]",
+        "recipe[php]",
+        "recipe[php::module_mysql]",
+        "recipe[wordpress]",
+        "recipe[ssl]",
+        "recipe[rfa-postfix]"
+        ]
+}

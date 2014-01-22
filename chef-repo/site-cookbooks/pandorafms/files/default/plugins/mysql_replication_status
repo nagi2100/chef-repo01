@@ -1,0 +1,18 @@
+#!/bin/bash
+WHICH='/usr/bin/which'
+MYSQL=$($WHICH mysql)
+GREP=$($WHICH grep)
+SED=$($WHICH sed)
+AWK=$($WHICH awk)
+
+result=$($MYSQL -uroot -e "SHOW SLAVE STATUS" 2>/dev/null | $GREP "[^-+]" | $SED "1d;3d" | $AWK -F'\t' '{print $11,$12}')
+
+Slave_IO_Running=`echo $result | $AWK -F' ' '{print $1}'`
+Slave_SQL_Running=`echo $result | $AWK -F' ' '{print $2}'`
+
+if [ "$Slave_IO_Running" = "Yes" -a "$Slave_SQL_Running" = "Yes" ]; then
+  # replication status OK
+  echo 1
+else
+  echo 0
+fi

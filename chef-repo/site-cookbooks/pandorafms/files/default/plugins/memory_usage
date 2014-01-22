@@ -1,0 +1,27 @@
+#!/usr/bin/perl
+
+use strict;
+
+my @free = `free -m`;
+# remove header
+shift(@free);
+# remove swap row
+pop(@free);
+
+my @row1 = split(' ', shift(@free));
+my @row2 = split(' ', shift(@free));
+
+if ( !defined(@row1[1]) || !defined(@row2[2]) ) {
+        exit 1;
+}
+
+# total / -/+ buffers/cacheのused
+print "<module>\n";
+print "<name><![CDATA[Memory Usage]]></name>\n";
+print "<type><![CDATA[generic_data]]></type>\n";
+print "<data><![CDATA[" . int(@row2[2] / @row1[1] * 100) . "]]></data>\n";
+print "<description>Mem Usage (%). Expr -> total / used(-/+ buffers/cache row) * 100</description>\n";
+print "</module>\n";
+
+exit  0;
+

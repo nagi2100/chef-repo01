@@ -1,0 +1,12 @@
+binddn uid=sudo,cn=sysaccounts,cn=etc,dc=eigyo,dc=co,dc=jp
+bindpw sVWmuC8Mc0qPeZBKoaIPvNFLsNHqyjns
+
+ssl start_tls
+tls_cacertfile /etc/ipa/ca.crt
+tls_checkpeer yes
+
+bind_timelimit 5
+timelimit 15
+
+uri ldap://br-13-1-d02-aaa-01.eigyo.co.jp ldap://br-13-1-d02-aaa-02.eigyo.co.jp
+sudoers_base ou=sudoers,dc=eigyo,dc=co,dc=jp

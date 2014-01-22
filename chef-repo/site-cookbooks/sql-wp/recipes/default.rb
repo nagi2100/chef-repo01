@@ -1,0 +1,31 @@
+#
+# Cookbook Name:: sql-wp
+# Recipe:: default
+#
+# Copyright 2013, YOUR_COMPANY_NAME
+#
+# All rights reserved - Do Not Redistribute
+#
+mysql_connection_info = ({
+  :host => "localhost",
+  :username => "root",
+  :password => "#{node['mysql']['server_root_password']}", 
+  :socket  => "/data/mysql/mysql.sock"
+})
+
+#include_recipe 'mysql::server'
+include_recipe 'database::mysql'
+mysql_database 'wordpress' do
+  connection mysql_connection_info 
+#  socket "/data/mysql/mysql.sock"
+  action :create
+end
+
+mysql_database_user 'wordpress' do
+  connection mysql_connection_info 
+  password 'wordpress'
+  database_name 'wordpress'
+  host '%'
+  privileges [:all]
+  action :grant
+end

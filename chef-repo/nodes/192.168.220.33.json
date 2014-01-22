@@ -1,0 +1,30 @@
+{
+  "common": {
+      "hostname": "BR-13-1-D02-DAT-01P",
+      "ipaddress": "192.168.220.33"
+  },
+  "mysql": {
+    "server_root_password": "zpmdmIPPCsSiFU4CTDkCrtyngtTKxh8a",
+    "server_repl_password": "HIQYHJdiSKJbeDCUiaT6h8qoNxlfeDcX",
+    "server_debian_password": "OUim6MdyWDYYciDwipRRS8fHcrSvHQPU",
+    "data_dir": "/data/mysql"
+  },
+    "postgresql": {
+    "password": {
+      "postgres": "eMntlJOJ9kSLgAytlxEGMWIkA0prTWus"
+    }
+  },
+  "php": {
+    "install_method": "package"
+    },
+  "run_list":
+    [
+      "yum::epel",
+      "yum::remi",
+      "mysql::server",
+      "postgresql::server",
+      "database",
+      "php",
+      "web-application"
+    ]
+}

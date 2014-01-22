@@ -1,0 +1,16 @@
+{
+  "name"         : "mysql55",
+  "description"  : "mysql 5.5xのinstall",
+  "chef_type"    : "role",
+  "json_class"   : "Chef::Role",
+  "override_attributes" : {
+  },
+  "run_list" : [ 
+    "recipe[yum::epel]",
+    "recipe[yum::remi]",
+    "recipe[mysql::server]"
+  ],
+  "env_run_lists" : {
+  }
+}
+

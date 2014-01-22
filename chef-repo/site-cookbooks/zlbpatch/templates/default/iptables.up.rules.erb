@@ -1,0 +1,12 @@
+*filter
+:INPUT ACCEPT [1278:203146]
+:FORWARD ACCEPT [112:9408]
+:OUTPUT ACCEPT [462:66302]
+COMMIT
+
+*nat
+:PREROUTING ACCEPT [550:61725]
+:POSTROUTING ACCEPT [38:2440]
+:OUTPUT ACCEPT [38:2440]
+-A POSTROUTING -s <%= node['zlbpatch']['nwaddr'] %>/<%= node['zlbpatch']['prefix'] %> -o <%= node['zlbpatch']['global_interface_name'] %> -j MASQUERADE 
+COMMIT
